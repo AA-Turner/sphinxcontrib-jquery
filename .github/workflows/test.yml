@@ -33,7 +33,7 @@ jobs:
           sphinx: ["sphinx>=3.0.0a0,<4", "~=3"]
         - python: "3.7"
           sphinx: ["sphinx>=2.0.0a0,<3", "~=2"]
-        - python: "3.6"
+        - python: "3.7"
           sphinx: ["sphinx>=1.8.0a0,<1.9", "~=1.8"]
 
     steps:
