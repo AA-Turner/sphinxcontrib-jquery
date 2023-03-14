@@ -22,11 +22,19 @@ jobs:
         sphinx:
         - ["sphinx>=4.0.0a0,<5", "~=4"]  # jQuery included
         - ["sphinx>=5.0.0a0,<6", "~=5"]  # jQuery deprecated
-        - ["sphinx>=6.0.0a0", ">=6"]  # jQuery removed
+        - ["sphinx>=6.0.0a0,<7", "~=6"]  # jQuery removed
         exclude:
         # Sphinx 6 does not support Python 3.7
         - python: "3.7"
           sphinx: ["sphinx>=6.0.0a0", ">=6"]
+        include:
+        # Test old versions of Sphinx
+        - python: "3.9"
+          sphinx: ["sphinx>=3.0.0a0,<4", "~=3"]
+        - python: "3.7"
+          sphinx: ["sphinx>=2.0.0a0,<3", "~=2"]
+        - python: "3.6"
+          sphinx: ["sphinx>=1.8.0a0,<1.9", "~=1.8"]
 
     steps:
     - uses: actions/checkout@v3
