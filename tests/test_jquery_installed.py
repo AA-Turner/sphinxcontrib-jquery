@@ -12,7 +12,10 @@ from sphinxcontrib.jquery import _FILES, _ROOT_DIR  # NoQA
 
 def run_blank_app(srcdir, **kwargs):
     Path(srcdir, "conf.py").write_text("", encoding="ascii")
-    Path(srcdir, "index.rst").write_text("", encoding="ascii")
+    if sphinx.version_info[:2] >= (2, 0):
+        Path(srcdir, "index.rst").touch()
+    else:
+        Path(srcdir, "contents.rst").touch()
     for _ in range(2):  # build twice to test re-builds
         app = SphinxTestApp(**kwargs, srcdir=srcdir)
         app.builder.build_all()
