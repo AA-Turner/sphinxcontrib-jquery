@@ -71,7 +71,10 @@ def test_jquery_installed_sphinx_ge_60(blank_app):
 def test_jquery_installed_sphinx_lt_60(blank_app):
     out_dir = blank_app(confoverrides={"extensions": ["sphinxcontrib.jquery"]})
 
-    text = out_dir.joinpath("index.html").read_text(encoding="utf-8")
+    if sphinx.version_info[:2] >= (2, 0):
+        text = out_dir.joinpath("index.html").read_text(encoding="utf-8")
+    else:
+        text = out_dir.joinpath("contents.html").read_text(encoding="utf-8")
     assert '<script src="_static/jquery.js"></script>' in text
     if sphinx.version_info[:1] == (5,):
         assert '<script src="_static/_sphinx_javascript_frameworks_compat.js"></script>' in text
